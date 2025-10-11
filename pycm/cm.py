@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """ConfusionMatrix module."""
-from __future__ import division, annotations
+from __future__ import division
 from typing import Union, List, Dict, Any, Tuple, Callable, Generator, Optional
 from .errors import pycmVectorError, pycmMatrixError, pycmCIError, pycmAverageError, pycmPlotError
 from .handlers import __class_stat_init__, __overall_stat_init__
@@ -651,14 +651,14 @@ class ConfusionMatrix():
         """
         return not self.__eq__(other)
 
-    def __copy__(self) -> ConfusionMatrix:
+    def __copy__(self) -> "ConfusionMatrix":
         """Create a copy of the confusion matrix."""
         _class = self.__class__
         result = _class.__new__(_class)
         result.__dict__.update(self.__dict__)
         return result
 
-    def copy(self) -> ConfusionMatrix:
+    def copy(self) -> "ConfusionMatrix":
         """Create a copy of the confusion matrix."""
         return self.__copy__()
 
@@ -893,7 +893,6 @@ class ConfusionMatrix():
         :param normalized: a flag for getting normalized confusion matrix
         :param one_vs_all: one-vs-all mode flag
         :param class_name: target class name for one-vs-all mode
-        :return: confusion matrix as a numpy.ndarray
         """
         classes = self.classes
         table = self.table
@@ -910,7 +909,7 @@ class ConfusionMatrix():
             array.append(row)
         return numpy.array(array)
 
-    def combine(self, other: ConfusionMatrix, metrics_off: bool = False) -> ConfusionMatrix:
+    def combine(self, other: "ConfusionMatrix", metrics_off: bool = False) -> "ConfusionMatrix":
         """
         Return the combination of two confusion matrices.
 
